@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:news_app/api/api_manager.dart';
-import 'package:news_app/models/sources_responce.dart';
+import 'package:news_app/models/sources_response.dart';
 import 'package:news_app/ui/home_screen/widgets/home_drawer.dart';
 import 'package:news_app/ui/home_screen/widgets/tab_bar_widget.dart';
 import 'package:news_app/utils/app_colors.dart';
 import 'package:news_app/utils/assets_manager.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = 'home_screen';
@@ -30,53 +30,48 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: const Drawer(
         child: HomeDrawer(),
       ),
-      body: Column(
-        children: [
-          FutureBuilder<SourcesResponse?>(
-              future: ApiManager.getSources(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.grayColor,
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  return Column(
-                    children: [
-                      const Text('SomeThing went wrong'),
-                      ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              ApiManager.getSources();
-                            });
-                          },
-                          child: const Text('tryAgain')),
-                    ],
-                  );
-                }
+      body: FutureBuilder<SourcesResponse?>(
+          future: ApiManager.getSources(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.grayColor,
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return Column(
+                children: [
+                  const Text('SomeThing went wrong'),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          ApiManager.getSources();
+                        });
+                      },
+                      child: const Text('tryAgain')),
+                ],
+              );
+            }
 
-                /// we have daata here
-                if (snapshot.data!.status == 'error') {
-                  return Column(
-                    children: [
-                      Text(snapshot.data!.message!),
-                      ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              ApiManager.getSources();
-                            });
-                          },
-                          child: const Text('tryAgain')),
-                    ],
-                  );
-                }
-                var sourcesList = snapshot.data!.sources!;
-                return TabBarWidget(sourcesList: sourcesList);
-              }),
-
-        ],
-      ),
+            /// we have daata here
+            if (snapshot.data!.status == 'error') {
+              return Column(
+                children: [
+                  Text(snapshot.data!.message!),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          ApiManager.getSources();
+                        });
+                      },
+                      child: const Text('tryAgain')),
+                ],
+              );
+            }
+            var sourcesList = snapshot.data!.sources!;
+            return TabBarWidget(sourcesList: sourcesList);
+          }),
     );
   }
 }
