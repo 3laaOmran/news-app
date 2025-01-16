@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:news_app/providers/language_provider.dart';
 import 'package:news_app/utils/app_colors.dart';
 import 'package:news_app/utils/text_styles.dart';
-
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LanguageDropdown extends StatefulWidget {
   const LanguageDropdown({super.key});
 
@@ -10,13 +12,13 @@ class LanguageDropdown extends StatefulWidget {
   State<LanguageDropdown> createState() => _LanguageDropdownState();
 }
 class _LanguageDropdownState extends State<LanguageDropdown> {
-  String selectedLanguage = 'en';
+  String? selectedLanguage ;
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
+    var languageProvider = Provider.of<LanguageProvider>(context);
     return Container(
       margin: EdgeInsets.symmetric(
           horizontal: width * 0.04, vertical: height * 0.01),
@@ -30,7 +32,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
         borderRadius: BorderRadius.circular(16),
       ),
       child: DropdownButton<String>(
-        value: selectedLanguage,
+        value: selectedLanguage ?? (languageProvider.appLanguage == 'en' ? 'en' : 'ar'),
         isExpanded: true,
         underline: const SizedBox(),
         icon: const Icon(
@@ -44,19 +46,24 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
         borderRadius: BorderRadius.circular(16),
         elevation: 4,
         alignment: Alignment.centerLeft,
-        items: const [
+        items:  [
           DropdownMenuItem(
             value: 'en',
-            child: Text('English'),
+            child: Text(AppLocalizations.of(context)!.english),
           ),
           DropdownMenuItem(
             value: 'ar',
-            child: Text('Arabic'),
+            child: Text(AppLocalizations.of(context)!.arabic),
           ),
         ],
         onChanged: (value) {
           setState(() {
             selectedLanguage = value!;
+            if(value == 'en'){
+              languageProvider.changeLanguage(newLanguage: value);
+            }else if(value == 'ar'){
+              languageProvider.changeLanguage(newLanguage: value);
+            }
           });
         },
       ),

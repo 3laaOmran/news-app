@@ -5,6 +5,7 @@ import 'package:news_app/ui/home_screen/widgets/home_drawer.dart';
 import 'package:news_app/ui/home_screen/widgets/tab_bar_widget.dart';
 import 'package:news_app/utils/app_colors.dart';
 import 'package:news_app/utils/assets_manager.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = 'home_screen';
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('General'),
+        title:  Text(AppLocalizations.of(context)!.home),
         actions: [
           const ImageIcon(AssetImage(AssetsManager.searchIcon)),
           SizedBox(width: width * 0.03),

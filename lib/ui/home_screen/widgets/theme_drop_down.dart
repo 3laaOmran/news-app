@@ -3,7 +3,7 @@ import 'package:news_app/providers/theme_provider.dart';
 import 'package:news_app/utils/app_colors.dart';
 import 'package:news_app/utils/text_styles.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ThemeDropdown extends StatefulWidget {
   const ThemeDropdown({super.key});
 
@@ -46,14 +46,14 @@ class _ThemeDropdownState extends State<ThemeDropdown> {
         borderRadius: BorderRadius.circular(16),
         elevation: 4,
         alignment: Alignment.centerLeft,
-        items: const [
+        items:  [
           DropdownMenuItem(
             value: 'dark',
-            child: Text('Dark'),
+            child: Text(AppLocalizations.of(context)!.dark),
           ),
           DropdownMenuItem(
             value: 'light',
-            child: Text('Light'),
+            child: Text(AppLocalizations.of(context)!.light),
           ),
         ],
         onChanged: (value) {

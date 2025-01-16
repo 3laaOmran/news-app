@@ -1,0 +1,14 @@
+{
+"home" : "Home",
+"news_app" : "News App",
+"go_to_home" : "Go To Home",
+"theme" : "Theme",
+"dark" : "Dark",
+"light" : "Light",
+"language" : "Language",
+"english" : "English",
+"arabic" : "Arabic",
+"search" : "Search",
+"view_full_article" : "View Full Article",
+"view_all" : "View All"
+}

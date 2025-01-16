@@ -8,6 +8,7 @@ import 'package:news_app/utils/text_styles.dart';
 import 'package:provider/provider.dart';
 
 import 'language_drop_down.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
@@ -24,10 +25,14 @@ class HomeDrawer extends StatelessWidget {
           alignment: Alignment.center,
           height: height * 0.25,
           width: double.infinity,
-          color:themeProvider.isDark()?AppColors.grayColor: AppColors.whiteColor,
+          color: themeProvider.isDark()
+              ? AppColors.grayColor
+              : AppColors.whiteColor,
           child: Text(
-            'News App',
-            style:themeProvider.isDark()?TextStyles.bold24White: TextStyles.bold24Black,
+            AppLocalizations.of(context)!.news_app,
+            style: themeProvider.isDark()
+                ? TextStyles.bold24White
+                : TextStyles.bold24Black,
           ),
         ),
         Divider(
@@ -38,15 +43,18 @@ class HomeDrawer extends StatelessWidget {
         SizedBox(
           height: height * 0.02,
         ),
-        const DrawerWidget(
-            imagePath: AssetsManager.homeIcon, text: 'Go To Home'),
+        DrawerWidget(
+            imagePath: AssetsManager.homeIcon,
+            text: AppLocalizations.of(context)!.go_to_home),
         Divider(
           thickness: 1,
           color: AppColors.whiteColor,
           endIndent: width * 0.05,
           indent: width * 0.04,
         ),
-        const DrawerWidget(imagePath: AssetsManager.themeIcon, text: 'Theme'),
+        DrawerWidget(
+            imagePath: AssetsManager.themeIcon,
+            text: AppLocalizations.of(context)!.theme),
         const ThemeDropdown(),
         Divider(
           thickness: 1,
@@ -54,8 +62,9 @@ class HomeDrawer extends StatelessWidget {
           endIndent: width * 0.05,
           indent: width * 0.04,
         ),
-        const DrawerWidget(
-            imagePath: AssetsManager.languageIcon, text: 'Language'),
+        DrawerWidget(
+            imagePath: AssetsManager.languageIcon,
+            text: AppLocalizations.of(context)!.language),
         const LanguageDropdown(),
       ],
     );
