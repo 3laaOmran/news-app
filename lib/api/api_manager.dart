@@ -6,7 +6,6 @@ import 'package:news_app/api/end_points.dart';
 import 'package:news_app/models/sources_responce.dart';
 class ApiManager {
 static Future<SourcesResponse?> getSources()async{
-  //https://newsapi.org/v2/top-headlines/sources?apiKey=bdd5f7b37ecf45418e9fba7bca3a303e
   Uri url = Uri.https(ApiConstants.baseUrl,
     EndPoints.sourceApi,
     {
