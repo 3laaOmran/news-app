@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/providers/theme_provider.dart';
 import 'package:news_app/ui/home_screen/home_screen.dart';
 import 'package:news_app/utils/app_theme.dart';
+import 'package:news_app/utils/helpers/cash_helper.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const NewsApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await CashHelper.init();
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider(),),
+      ],
+      child: const NewsApp()));
 }
 
 class NewsApp extends StatelessWidget {
@@ -11,6 +20,7 @@ class NewsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider= Provider.of<ThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: HomeScreen.routeName,
@@ -19,7 +29,7 @@ class NewsApp extends StatelessWidget {
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode:themeProvider.appTheme,
     );
   }
 }
