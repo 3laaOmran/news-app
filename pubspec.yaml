@@ -43,6 +43,8 @@ dependencies:
   google_fonts: ^6.2.1
   shared_preferences: ^2.3.5
   provider: ^6.1.2
+  timeago: ^3.7.0
+  cached_network_image: ^3.4.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
