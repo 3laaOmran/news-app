@@ -12,5 +12,7 @@
 "view_full_article" : "View Full Article",
 "view_all" : "View All",
 "welcome" : "Welcome",
-"welcome_msg" : "Here is Some News For You"
+"welcome_msg" : "Here is Some News For You",
+"error_msg" : "SomeThing Went Wrong",
+"try_again" : "Try Again"
 }
