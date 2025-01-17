@@ -12,5 +12,7 @@
 "view_full_article" : "عرض المقال كاملا",
 "view_all" : "عرض الكل",
 "welcome" : "مرحبًا بكم",
-"welcome_msg" : "إليكم بعض الأخبار"
+"welcome_msg" : "إليكم بعض الأخبار",
+"error_msg" : " حدث خطأ ما",
+"try_again" : "حاول مرة اخرى"
 }
