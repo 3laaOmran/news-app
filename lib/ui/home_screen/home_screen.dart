@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:news_app/api/api_manager.dart';
+import 'package:news_app/models/category_model.dart';
 import 'package:news_app/models/sources_response.dart';
+import 'package:news_app/ui/home_screen/widgets/category_list_widget.dart';
 import 'package:news_app/ui/home_screen/widgets/home_drawer.dart';
 import 'package:news_app/ui/home_screen/widgets/tab_bar_widget.dart';
 import 'package:news_app/utils/app_colors.dart';
@@ -21,40 +23,53 @@ class _HomeScreenState extends State<HomeScreen> {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title:  Text(AppLocalizations.of(context)!.home),
+        title: Text(categoryModel == null
+            ? AppLocalizations.of(context)!.home
+            : categoryModel!.title),
         actions: [
           const ImageIcon(AssetImage(AssetsManager.searchIcon)),
           SizedBox(width: width * 0.03),
         ],
       ),
-      drawer: const Drawer(
-        child: HomeDrawer(),
+      drawer: Drawer(
+        child: HomeDrawer(
+          onGoToHomeClicked: () {
+            setState(() {
+              categoryModel = null;
+              Navigator.pop(context);
+            });
+          },
+        ),
       ),
-      body: FutureBuilder<SourcesResponse?>(
-          future: ApiManager.getSources(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.grayColor,
-                ),
-              );
-            } else if (snapshot.hasError) {
-              return Column(
-                children: [
-                  const Text('SomeThing went wrong'),
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          ApiManager.getSources();
-                        });
-                      },
-                      child: const Text('tryAgain')),
-                ],
-              );
-            }
+      body: categoryModel == null
+          ? CategoryListWidget(
+              onViewAllClicked: onViewAllClicked,
+            )
+          : FutureBuilder<SourcesResponse?>(
+              future: ApiManager.getSources(categoryModel!.id),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.grayColor,
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Column(
+                    children: [
+                      const Text('SomeThing went wrong'),
+                      ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              ApiManager.getSources(categoryModel!.id);
+                            });
+                          },
+                          child: const Text('tryAgain')),
+                    ],
+                  );
+                }
 
-            /// we have daata here
+                /// we have daata here
             if (snapshot.data!.status == 'error') {
               return Column(
                 children: [
@@ -62,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          ApiManager.getSources();
+                          ApiManager.getSources(categoryModel!.id);
                         });
                       },
                       child: const Text('tryAgain')),
@@ -73,5 +88,13 @@ class _HomeScreenState extends State<HomeScreen> {
             return TabBarWidget(sourcesList: sourcesList);
           }),
     );
+  }
+
+  CategoryModel? categoryModel;
+
+  void onViewAllClicked(CategoryModel newCategoryModel) {
+    setState(() {
+      categoryModel = newCategoryModel;
+    });
   }
 }
