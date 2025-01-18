@@ -22,4 +22,5 @@ class AssetsManager {
       'assets/images/technology_dark_mode.png';
   static const String technologyLightMode =
       'assets/images/technology_light_mode.png';
+  static const String searchImage = 'assets/images/search_image.png';
 }

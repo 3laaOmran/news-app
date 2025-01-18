@@ -25,7 +25,7 @@ class CategoryListWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               horizontal: width * 0.03, vertical: height * 0.006),
           child: Text(
-            '${AppLocalizations.of(context)!.welcome} \n ${AppLocalizations.of(context)!.welcome_msg}',
+            '${AppLocalizations.of(context)!.welcome} \n${AppLocalizations.of(context)!.welcome_msg}',
             style: themeProvider.isDark()
                 ? TextStyles.medium24White
                 : TextStyles.medium24black,

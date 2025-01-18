@@ -14,5 +14,6 @@
 "welcome" : "Welcome",
 "welcome_msg" : "Here is Some News For You",
 "error_msg" : "SomeThing Went Wrong",
-"try_again" : "Try Again"
+"try_again" : "Try Again",
+"no_search_data" : "No Data For:"
 }
