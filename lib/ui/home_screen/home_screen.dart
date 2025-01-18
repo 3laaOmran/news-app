@@ -7,6 +7,7 @@ import 'package:news_app/providers/theme_provider.dart';
 import 'package:news_app/ui/home_screen/widgets/category_list_widget.dart';
 import 'package:news_app/ui/home_screen/widgets/home_drawer.dart';
 import 'package:news_app/ui/home_screen/widgets/tab_bar_widget.dart';
+import 'package:news_app/ui/search_screen/search_screen.dart';
 import 'package:news_app/utils/app_colors.dart';
 import 'package:news_app/utils/assets_manager.dart';
 import 'package:news_app/utils/text_styles.dart';
@@ -33,7 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ? AppLocalizations.of(context)!.home
             : categoryModel!.title),
         actions: [
-          const ImageIcon(AssetImage(AssetsManager.searchIcon)),
+          GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, SearchScreen.routeName);
+              },
+              child: const ImageIcon(AssetImage(AssetsManager.searchIcon))),
           SizedBox(width: width * 0.03),
         ],
       ),
