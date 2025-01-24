@@ -44,6 +44,7 @@ dependencies:
   shared_preferences: ^2.3.5
   provider: ^6.1.2
   timeago: ^3.7.0
+  flutter_bloc: ^9.0.0
   cached_network_image: ^3.4.1
   toggle_switch: ^2.3.0
   webview_flutter: ^4.10.0
