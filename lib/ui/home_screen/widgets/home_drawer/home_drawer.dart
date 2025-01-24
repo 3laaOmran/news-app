@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:news_app/providers/theme_provider.dart';
-import 'package:news_app/ui/home_screen/widgets/drawer_widget.dart';
-import 'package:news_app/ui/home_screen/widgets/theme_drop_down.dart';
+import 'package:news_app/ui/home_screen/widgets/home_drawer/theme_drop_down.dart';
 import 'package:news_app/utils/app_colors.dart';
 import 'package:news_app/utils/assets_manager.dart';
 import 'package:news_app/utils/text_styles.dart';
 import 'package:provider/provider.dart';
 
+import 'drawer_widget.dart';
 import 'language_drop_down.dart';
 
 class HomeDrawer extends StatelessWidget {
