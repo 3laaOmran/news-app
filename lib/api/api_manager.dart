@@ -8,24 +8,26 @@ import 'package:news_app/models/sources_response.dart';
 
 class ApiManager {
   static Future<SourcesResponse?> getSources(String categoryId) async {
-    Uri url = Uri.https(ApiConstants.baseUrl,
-    EndPoints.sourceApi,
-    {
-      'apiKey': ApiConstants.apiKey, 'category': categoryId}
-  );
-  try {
-    var response =await http.get(url);
-    var responseBody = response.body;
-    var json = jsonDecode(responseBody);
-    return SourcesResponse.fromJson(json);
-  } catch (e) {
-    rethrow;
+    Uri url = Uri.https(ApiConstants.baseUrl, EndPoints.sourceApi,
+        {'apiKey': ApiConstants.apiKey, 'category': categoryId});
+    try {
+      var response = await http.get(url);
+      var responseBody = response.body;
+      var json = jsonDecode(responseBody);
+      return SourcesResponse.fromJson(json);
+    } catch (e) {
+      rethrow;
+    }
   }
-}
 
-  static Future<NewsResponse?> getNewsBySourceId(String sourceId) async {
-    Uri url = Uri.https(ApiConstants.baseUrl, EndPoints.newsApi,
-        {'apiKey': ApiConstants.apiKey, 'sources': sourceId});
+  static Future<NewsResponse?> getNewsBySourceId(
+      String sourceId, int page) async {
+    Uri url = Uri.https(ApiConstants.baseUrl, EndPoints.newsApi, {
+      'apiKey': ApiConstants.apiKey,
+      'sources': sourceId,
+      'page': page.toString(),
+      'pageSize': 10.toString()
+    });
     try {
       var response = await http.get(url);
       var responseBody = response.body;
