@@ -20,6 +20,7 @@ class _TabBarWidgetState extends State<TabBarWidget> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     return BlocBuilder<SourcesCubit, SourcesStates>(
+      bloc: cubit,
       builder: (context, state) {
         return DefaultTabController(
             length: widget.sourcesList.length,
@@ -32,7 +33,6 @@ class _TabBarWidgetState extends State<TabBarWidget> {
                     tabAlignment: TabAlignment.start,
                     onTap: (index) {
                       cubit.changeSelectedIndex(index);
-                      setState(() {});
                     },
                     tabs: widget.sourcesList.map((src) {
                       return SourceNameWidget(
