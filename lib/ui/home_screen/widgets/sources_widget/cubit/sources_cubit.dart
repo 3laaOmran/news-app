@@ -1,14 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/api/api_manager.dart';
+import 'package:news_app/repository/source/data_source/source_remote_data_source.dart';
+import 'package:news_app/repository/source/data_source/source_remote_data_source_impl.dart';
+import 'package:news_app/repository/source/repository/source_repository.dart';
+import 'package:news_app/repository/source/repository/source_repository_impl.dart';
 import 'package:news_app/ui/home_screen/widgets/sources_widget/cubit/sources_state.dart';
 
 class SourcesCubit extends Cubit<SourcesStates> {
-  SourcesCubit() : super(SourcesLoadingState());
+  SourceRepository sourceRepository;
+
+  SourcesCubit({required this.sourceRepository}) : super(SourcesLoadingState());
 
   void getSources(String categoryId) async {
     try {
       emit(SourcesLoadingState());
-      var response = await ApiManager.getSources(categoryId);
+      var response = await sourceRepository.getSources(categoryId);
       if (response!.status == 'error') {
         emit(SourcesErrorState(errorMessage: response.message!));
         return;

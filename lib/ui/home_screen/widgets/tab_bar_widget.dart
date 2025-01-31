@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/di/di.dart';
 import 'package:news_app/models/sources_response.dart';
 import 'package:news_app/ui/home_screen/widgets/news/news_widget.dart';
 import 'package:news_app/ui/home_screen/widgets/sources_widget/cubit/sources_cubit.dart';
@@ -15,7 +16,7 @@ class TabBarWidget extends StatefulWidget {
 }
 
 class _TabBarWidgetState extends State<TabBarWidget> {
-  var cubit = SourcesCubit();
+  var cubit = SourcesCubit(sourceRepository: injectSourceRepository());
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;

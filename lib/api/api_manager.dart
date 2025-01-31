@@ -7,7 +7,7 @@ import 'package:news_app/models/news_response.dart';
 import 'package:news_app/models/sources_response.dart';
 
 class ApiManager {
-  static Future<SourcesResponse?> getSources(String categoryId) async {
+  Future<SourcesResponse?> getSources(String categoryId) async {
     Uri url = Uri.https(ApiConstants.baseUrl,
     EndPoints.sourceApi,
     {
@@ -23,7 +23,7 @@ class ApiManager {
   }
 }
 
-  static Future<NewsResponse?> getNewsBySourceId(String sourceId) async {
+  Future<NewsResponse?> getNewsBySourceId(String sourceId) async {
     Uri url = Uri.https(ApiConstants.baseUrl, EndPoints.newsApi,
         {'apiKey': ApiConstants.apiKey, 'sources': sourceId});
     try {
