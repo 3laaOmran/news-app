@@ -6,6 +6,9 @@ import 'package:news_app/ui/home_screen/widgets/sources_widget/cubit/sources_cub
 import 'package:news_app/ui/home_screen/widgets/sources_widget/cubit/sources_state.dart';
 import 'package:news_app/utils/app_colors.dart';
 
+import '../../../di/di_inject.dart';
+import '../../../repository/source/repository/source_repository.dart';
+
 class TabBarWidget extends StatefulWidget {
   final List<Source> sourcesList;
   const TabBarWidget({super.key, required this.sourcesList});
@@ -15,7 +18,7 @@ class TabBarWidget extends StatefulWidget {
 }
 
 class _TabBarWidgetState extends State<TabBarWidget> {
-  var cubit = SourcesCubit();
+  var cubit = SourcesCubit(sourceRepository: getIt<SourceRepository>());
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;

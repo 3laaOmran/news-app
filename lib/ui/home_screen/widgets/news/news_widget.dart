@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:news_app/di/di_inject.dart';
 import 'package:news_app/models/sources_response.dart';
 import 'package:news_app/providers/theme_provider.dart';
+import 'package:news_app/repository/news/repository/news_repository.dart';
 import 'package:news_app/ui/home_screen/widgets/news/cubit/news_cubit.dart';
 import 'package:news_app/ui/home_screen/widgets/news/cubit/news_state.dart';
 import 'package:news_app/ui/home_screen/widgets/news/widgets/news_details_widget.dart';
@@ -20,9 +22,13 @@ class NewsWidget extends StatefulWidget {
 }
 
 class _NewsWidgetState extends State<NewsWidget> {
-  final NewsCubit cubit = NewsCubit();
+// <<<<<<< feature/news_and_sources_mvvm_bloc
+  var cubit = NewsCubit(newsRepository: getIt<NewsRepository>());
+// =======
+//   final NewsCubit cubit = NewsCubit();
   final ScrollController scrollController = ScrollController();
   int currentPage = 1;
+// >>>>>>> development
 
   @override
   void initState() {
