@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive/hive.dart';
+import 'package:news_app/models/news_response.dart';
+import 'package:news_app/models/sources_response.dart';
 import 'package:news_app/providers/language_provider.dart';
 import 'package:news_app/providers/theme_provider.dart';
 import 'package:news_app/ui/home_screen/home_screen.dart';
@@ -8,12 +11,22 @@ import 'package:news_app/ui/search_screen/search_screen.dart';
 import 'package:news_app/utils/app_theme.dart';
 import 'package:news_app/utils/helpers/cash_helper.dart';
 import 'package:news_app/utils/my_bloc_observer.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+
+import 'di/di_inject.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await CashHelper.init();
   Bloc.observer = MyBlocObserver();
+  var directory = await getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
+  Hive.registerAdapter(SourcesResponseAdapter());
+  Hive.registerAdapter(SourceAdapter());
+  Hive.registerAdapter(NewsResponseAdapter());
+  Hive.registerAdapter(NewsAdapter());
+  configureDependencies();
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider(),),

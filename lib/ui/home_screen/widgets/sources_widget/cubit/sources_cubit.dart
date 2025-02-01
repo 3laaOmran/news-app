@@ -1,11 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/api/api_manager.dart';
-import 'package:news_app/repository/source/data_source/source_remote_data_source.dart';
-import 'package:news_app/repository/source/data_source/source_remote_data_source_impl.dart';
+import 'package:injectable/injectable.dart';
 import 'package:news_app/repository/source/repository/source_repository.dart';
-import 'package:news_app/repository/source/repository/source_repository_impl.dart';
 import 'package:news_app/ui/home_screen/widgets/sources_widget/cubit/sources_state.dart';
 
+@injectable
 class SourcesCubit extends Cubit<SourcesStates> {
   SourceRepository sourceRepository;
 

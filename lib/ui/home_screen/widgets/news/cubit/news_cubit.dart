@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:news_app/repository/news/repository/news_repository.dart';
 
 import 'news_state.dart';
 
+@injectable
 class NewsCubit extends Cubit<NewsStates> {
   NewsRepository newsRepository;
 

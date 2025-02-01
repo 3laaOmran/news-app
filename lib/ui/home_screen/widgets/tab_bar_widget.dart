@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/di/di.dart';
 import 'package:news_app/models/sources_response.dart';
 import 'package:news_app/ui/home_screen/widgets/news/news_widget.dart';
 import 'package:news_app/ui/home_screen/widgets/sources_widget/cubit/sources_cubit.dart';
 import 'package:news_app/ui/home_screen/widgets/sources_widget/cubit/sources_state.dart';
 import 'package:news_app/utils/app_colors.dart';
+
+import '../../../di/di_inject.dart';
+import '../../../repository/source/repository/source_repository.dart';
 
 class TabBarWidget extends StatefulWidget {
   final List<Source> sourcesList;
@@ -16,7 +18,7 @@ class TabBarWidget extends StatefulWidget {
 }
 
 class _TabBarWidgetState extends State<TabBarWidget> {
-  var cubit = SourcesCubit(sourceRepository: injectSourceRepository());
+  var cubit = SourcesCubit(sourceRepository: getIt<SourceRepository>());
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;

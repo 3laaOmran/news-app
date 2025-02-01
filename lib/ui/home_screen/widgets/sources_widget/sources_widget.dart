@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:news_app/di/di.dart';
+import 'package:news_app/di/di_inject.dart';
 import 'package:news_app/models/category_model.dart';
 import 'package:news_app/providers/theme_provider.dart';
+import 'package:news_app/repository/source/repository/source_repository.dart';
 import 'package:news_app/ui/home_screen/widgets/sources_widget/cubit/sources_cubit.dart';
 import 'package:news_app/ui/home_screen/widgets/sources_widget/cubit/sources_state.dart';
 import 'package:news_app/ui/home_screen/widgets/tab_bar_widget.dart';
@@ -21,7 +22,8 @@ class SourcesWidget extends StatefulWidget {
 }
 
 class _SourcesWidgetState extends State<SourcesWidget> {
-  SourcesCubit cubit = SourcesCubit(sourceRepository: injectSourceRepository());
+  SourcesCubit cubit =
+      SourcesCubit(sourceRepository: getIt<SourceRepository>());
 
   @override
   void initState() {
