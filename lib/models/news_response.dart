@@ -1,10 +1,19 @@
+import 'package:hive/hive.dart';
 import 'package:news_app/models/sources_response.dart';
 
-class NewsResponse {
+part 'news_response.g.dart';
+
+@HiveType(typeId: 3)
+class NewsResponse extends HiveObject {
+  @HiveField(0)
   String? status;
+  @HiveField(1)
   int? totalResults;
+  @HiveField(2)
   List<News>? articles;
+  @HiveField(3)
   String? code;
+  @HiveField(4)
   String? message;
 
   NewsResponse({
@@ -41,14 +50,23 @@ class NewsResponse {
   }
 }
 
-class News {
+@HiveType(typeId: 4)
+class News extends HiveObject {
+  @HiveField(0)
   Source? source;
+  @HiveField(1)
   String? author;
+  @HiveField(3)
   String? title;
+  @HiveField(4)
   String? description;
+  @HiveField(5)
   String? url;
+  @HiveField(6)
   String? urlToImage;
+  @HiveField(7)
   String? publishedAt;
+  @HiveField(8)
   String? content;
 
   News({
